@@ -1,5 +1,6 @@
 package config;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -8,7 +9,7 @@ import java.util.Properties;
  * Created by cwen on 17-2-13.
  */
 public class Config {
-    private static String configFile = "config.properties";
+    private static String configFile = "config/config.properties";
     public static String  secretID;
     public static String secretKey;
     public static String cdbIP;
@@ -22,13 +23,16 @@ public class Config {
     public static int maxSize = 128;
     public static int maxIdle =2;
 
-
+    static {
+        readConfig();
+    }
 
     private static void readConfig() {
-        InputStream is = Config.class.getClassLoader().getResourceAsStream(configFile);
+        InputStream input = null;
         Properties pro = new Properties();
         try {
-            pro.load(is);
+            input = new FileInputStream(configFile);
+            pro.load(input);
             secretID = pro.getProperty("secretID");
             secretKey = pro.getProperty("secretKey");
             cdbIP = pro.getProperty("cdbIP");
