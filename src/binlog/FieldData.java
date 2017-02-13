@@ -46,7 +46,7 @@ public class FieldData {
         this.tableName = tableName;
     }
 
-    public int getColumCount() {
+    public int getColumnCount() {
         return columCount;
     }
 
