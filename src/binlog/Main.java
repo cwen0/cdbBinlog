@@ -1,6 +1,6 @@
 package binlog;
 
-import com.alibaba.fastjson.JSONReader;
+
 import com.qcloud.dts.context.SubscribeContext;
 import com.qcloud.dts.message.ClusterMessage;
 import com.qcloud.dts.message.DataMessage;
@@ -8,66 +8,76 @@ import com.qcloud.dts.subscribe.ClusterListener;
 import com.qcloud.dts.subscribe.DefaultSubscribeClient;
 import com.qcloud.dts.subscribe.SubscribeClient;
 
-import java.io.FileReader;
 import java.util.List;
+import config.Config;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
+    private static Logger log = LoggerFactory.getLogger(Main.class);
+    SubscribeClient client = null;
 
-    public static void main(String[] args) {
-	// write your code here
-        Config config = null;
-        try {
-            JSONReader reader = new JSONReader(new FileReader("config.json"));
-            config = reader.readObject(Config.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public void initClient() {
         SubscribeContext context = new SubscribeContext();
+        context.setSecretId(Config.secretID);
+        context.setSecretKey(Config.secretKey);
+        context.setServiceIp(Config.cdbIP);
+        context.setServicePort(Config.cdbPort);
 
-        context.setSecretId(config.getId());
-        context.setSecretKey(config.getKey());
-        context.setServiceIp(config.getIp());
-        context.setServicePort(config.getPort());
-
-        SubscribeClient client = null;
         try {
             client = new DefaultSubscribeClient(context);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        ClusterListener listener = new ClusterListener() {
-            @Override
-            public void notify(List<ClusterMessage> messages) throws Exception {
-                for(ClusterMessage m:messages) {
-                    for(DataMessage.Record.Field f:m.getRecord().getFieldList()) {
-                        if(f.getFieldname().equals("id")) {
-                            System.out.println("seq:"+f.getValue());
-                        }
-                    }
-                    m.ackAsConsumed();
-                }
-            }
-
-            @Override
-            public void onException(Exception e) {
-                System.out.println("listen exception" + e);
-            }
-        };
-
         try {
             client.addClusterListener(listener);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        client.askForGUID(config.getGuid());
-
-        try {
+            client.askForGUID(Config.guid);
             client.start();
-        } catch (Exception e) {
+            log.info("The service starts successfully and is waiting for data");
+        }catch (Exception e) {
+            log.error(e.getMessage(),e);
+        }
+    }
+
+    ClusterListener listener = new ClusterListener() {
+        @Override
+        public void notify(List<ClusterMessage> messages) throws Exception {
+            for(ClusterMessage m:messages) {
+                DataMessage.Record record = m.getRecord();
+                try{
+                    messageHandler(record);
+                    m.ackAsConsumed();
+                }catch (Exception e) {
+                    log.error(e.getMessage(),e);
+                }
+            }
+        }
+
+        public void noException(Exception e) {
             e.printStackTrace();
         }
+    };
+
+
+    public void messageHandler(DataMessage.Record record) {
+        MessageHandler handler = new MessageHandler();
+        switch (record.getOpt()) {
+            case INSERT:
+                break;
+            case UPDATE:
+                break;
+            case DELETE:
+                break;
+            case DDL:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().initClient();
     }
 }
