@@ -4,6 +4,7 @@ package binlog;
 import com.qcloud.dts.context.SubscribeContext;
 import com.qcloud.dts.message.ClusterMessage;
 import com.qcloud.dts.message.DataMessage.Record;
+import com.qcloud.dts.message.DataMessage.Record.Type;
 import com.qcloud.dts.subscribe.ClusterListener;
 import com.qcloud.dts.subscribe.DefaultSubscribeClient;
 import com.qcloud.dts.subscribe.SubscribeClient;
@@ -60,24 +61,12 @@ public class Main {
         }
     };
 
-
     public void messageHandler(Record record) {
         MessageHandler handler = new MessageHandler();
-        switch (record.getOpt()) {
-            case INSERT:
-                handler.handleInsert(record);
-                break;
-            case UPDATE:
-                handler.handleUpdate(record);
-                break;
-            case DELETE:
-                handler.handleDelete(record);
-                break;
-            case DDL:
-                handler.handleDdl(record);
-                break;
-            default:
-                break;
+        Type recordType = record.getOpt();
+        if(recordType == Type.UPDATE || recordType == Type.INSERT
+                || recordType == Type.DELETE || recordType == Type.DDL) {
+            handler.handle(record);
         }
     }
 

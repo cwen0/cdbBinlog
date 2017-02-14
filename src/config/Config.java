@@ -15,13 +15,7 @@ public class Config {
     public static String cdbIP;
     public static int cdbPort;
     public static String guid;
-    public static String driverName;
-    public static String url = null;
-    public static String userName = null;
-    public static String password = null;
-    public static int initialSize = 5;
-    public static int maxSize = 128;
-    public static int maxIdle =2;
+    public static String binlogFile;
 
     static {
         readConfig();
@@ -39,13 +33,7 @@ public class Config {
             String  cdbPortStr = pro.getProperty("cdbPort");
             cdbPort = Integer.parseInt(cdbPortStr);
             guid = pro.getProperty("guid");
-            driverName = pro.getProperty("driverName");
-            url = pro.getProperty("url");
-            userName = pro.getProperty("userName");
-            password = pro.getProperty("password");
-            initialSize = Integer.parseInt(pro.getProperty("initialSize"));
-            maxSize = Integer.parseInt(pro.getProperty("maxSize"));
-            maxIdle = Integer.parseInt(pro.getProperty("maxIdle"));
+            binlogFile = pro.getProperty("binlogFile");
         } catch (IOException e) {
             e.printStackTrace();
         }
