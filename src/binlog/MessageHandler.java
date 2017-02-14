@@ -28,7 +28,7 @@ public class MessageHandler {
         try {
             conn.setAutoCommit(false);
             FieldData data = getColumnsAndValues(record);
-            String sql = "insert into" + data.getDbName()+"."+data.getTableName() + "(";
+            String sql = "replace into" + data.getDbName()+"."+data.getTableName() + "(";
             for(int i = 0; i < data.getColumns().size(); i++) {
                 sql += data.getColumns().get(i) + ",";
             }
