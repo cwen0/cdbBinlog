@@ -1,0 +1,15 @@
+syntax = "proto2";
+package protocol;
+
+option java_package = "cdbBinlog.protocol";
+option java_outer_classname = "BinlogProto";
+
+message Binlog {
+    optional uint64 postion   = 1;
+    optional string dbName    = 2;
+    optional string type  = 3 [default = "UPDATE"];
+    optional int32 columnCount    = 4 [default = 0];
+    optional string primaryKey    = 5;
+    optional string primaryValue  = 6;
+    repeated bytes rows     = 7;
+}
