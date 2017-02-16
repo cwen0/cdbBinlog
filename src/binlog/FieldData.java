@@ -1,5 +1,7 @@
 package binlog;
 
+import com.qcloud.dts.message.DataMessage.Record.Type;
+
 import java.util.List;
 
 /**
@@ -8,19 +10,19 @@ import java.util.List;
 public class FieldData {
     private String dbName;
     private String tableName;
-    private String type;
+    private Type type;
     private int columnCount;
     private List<String> columns;
-    private List<Object> values;
+    private List<String> values;
     private List<String> primaryKey;
-    private List<Object> primaryValue;
+    private List<String> primaryValue;
 
     public FieldData() {
         super();
     }
 
-    public FieldData(String dbName, String tableName,String type, int columnCount, List<String> columns,
-                     List<Object> values, List<String> primaryKey, List<Object> primaryValue) {
+    public FieldData(String dbName, String tableName,Type type, int columnCount, List<String> columns,
+                     List<String> values, List<String> primaryKey, List<String> primaryValue) {
         super();
         this.dbName = dbName;
         this.tableName = tableName;
@@ -48,11 +50,11 @@ public class FieldData {
         this.tableName = tableName;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -72,11 +74,11 @@ public class FieldData {
        this.columns = columns;
     }
 
-    public List<Object> getValues() {
+    public List<String> getValues() {
         return this.values;
     }
 
-    public void setValues(List<Object> values) {
+    public void setValues(List<String> values) {
        this.values = values;
     }
 
@@ -88,11 +90,11 @@ public class FieldData {
        this.primaryKey = primaryKey;
     }
 
-    public List<Object> getPrimaryValue() {
+    public List<String> getPrimaryValue() {
         return primaryValue;
     }
 
-    public void setPrimaryValue(List<Object> primaryValue) {
+    public void setPrimaryValue(List<String> primaryValue) {
         this.primaryValue = primaryValue;
     }
 }

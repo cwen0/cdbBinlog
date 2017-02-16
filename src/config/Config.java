@@ -16,7 +16,7 @@ public class Config {
     public static int cdbPort;
     public static String guid;
     public static String binlogPath;
-    public static String maxSize;
+    public static int maxSize;
 
     static {
         readConfig();
@@ -35,7 +35,8 @@ public class Config {
             cdbPort = Integer.parseInt(cdbPortStr);
             guid = pro.getProperty("guid");
             binlogPath = pro.getProperty("binlogPath");
-            maxSize = pro.getProperty("maxSize")
+            String maxSizeStr = pro.getProperty("maxSize");
+            maxSize = Integer.parseInt(maxSizeStr);
         } catch (IOException e) {
             e.printStackTrace();
         }

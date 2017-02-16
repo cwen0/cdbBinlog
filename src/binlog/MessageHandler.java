@@ -1,18 +1,20 @@
 package binlog;
 
-import com.alibaba.fastjson.JSON;
 import com.qcloud.dts.message.DataMessage;
 import com.qcloud.dts.message.DataMessage.Record;
 import com.qcloud.dts.message.DataMessage.Record.Type;
 import com.qcloud.dts.message.DataMessage.Record.Field;
 
-import config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import protocol.BinlogProto.Row;
+import protocol.BinlogProto.Binlog;
+import protocol.BinlogProto.BinlogType;
 import util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by cwen on 17-2-13.
@@ -23,10 +25,55 @@ public class MessageHandler {
     public void handle(Record record) {
        try {
            FieldData data = getColumnsAndValues(record);
-           String jsonString = JSON.toJSONString(data);
-           FileUtil.writeToFile(Config.binlogFile, jsonString);
-       } catch (Exception e) {
+           Binlog.Builder binlog = Binlog.newBuilder();
+           switch (data.getType()){
+               case INSERT:
+                   binlog.setType(BinlogType.INSERT);
+                   for(int i = 0; i < data.getColumnCount();i++) {
+                        Row.Builder row = Row.newBuilder();
+                        row.setColumnName(data.getColumns().get(i));
+                        row.setColumnValue(data.getValues().get(i));
+                        binlog.setRows(i, row);
+                   }
+                   break;
+               case UPDATE:
+                   binlog.setType(BinlogType.UPDATE);
+                   for(int i = 0; i < data.getColumnCount();i++) {
+                       Row.Builder row = Row.newBuilder();
+                       row.setColumnName(data.getColumns().get(i));
+                       row.setColumnValue(data.getValues().get(i));
+                       binlog.setRows(i, row);
+                   }
+                   break;
+               case DELETE:
+                   binlog.setType(BinlogType.DELETE);
+                   for(int i = 0; i < data.getColumnCount();i++) {
+                       Row.Builder row = Row.newBuilder();
+                       row.setColumnName(data.getColumns().get(i));
+                       row.setColumnValue(data.getValues().get(i));
+                       binlog.setRows(i, row);
+                   }
+                   break;
+               case DDL:
+                   binlog.setType(BinlogType.DDL);
+                   for(int i = 0; i < data.getColumnCount();i++) {
+                       Row.Builder row = Row.newBuilder();
+                       row.setColumnValue(data.getValues().get(i));
+                       binlog.setRows(i, row);
+                   }
+                   break;
+               default:
+                   break;
+           }
+           binlog.setPostion(FileUtil.getPostion());
+           binlog.setDbName(data.getDbName());
+           binlog.setColumnCount(data.getColumnCount());
+           binlog.setPrimaryKey(data.getPrimaryKey().toString());
+           binlog.setPrimaryValue(data.getPrimaryValue().toString());
+           FileUtil.writeToFile(binlog);
 
+       } catch (Exception e) {
+            log.error("write to file error", e);
        }
     }
 
@@ -34,9 +81,9 @@ public class MessageHandler {
        String dbName = record.getDbName();
        String tableName = record.getTableName();
        List<String> columns = new ArrayList<String>();
-       List<Object> values = new ArrayList<Object>();
+       List<String> values = new ArrayList<String>();
        List<String> primaryKey = new ArrayList<String>();
-       List<Object> primaryValue = new ArrayList<Object>();
+       List<String> primaryValue = new ArrayList<String>();
 
        int columnCount = 0;
        if (record.getOpt() == Type.UPDATE) {
@@ -56,7 +103,7 @@ public class MessageHandler {
 
            try {
                 String key = f.getFieldname();
-                Object value = f.getValue();
+                String value = f.getValue().toString();
                 columns.add(key);
                 values.add(value);
                 if(f.isPrimary()) {
@@ -73,7 +120,7 @@ public class MessageHandler {
                i++;
            }
        }
-       FieldData data = new FieldData(dbName, tableName,record.getOpt().toString(),columnCount,columns,values,
+       FieldData data = new FieldData(dbName, tableName,record.getOpt(),columnCount,columns,values,
                primaryKey,primaryValue);
        return data;
     }
