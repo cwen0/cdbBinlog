@@ -8,6 +8,7 @@ import com.qcloud.dts.message.DataMessage.Record.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protocol.BinlogProto.Row;
+import protocol.BinlogProto.Pos;
 import protocol.BinlogProto.Binlog;
 import protocol.BinlogProto.BinlogType;
 import util.FileUtil;
@@ -65,7 +66,10 @@ public class MessageHandler {
                default:
                    break;
            }
-           binlog.setPostion(FileUtil.getPostion());
+           Pos.Builder pos = Pos.newBuilder();
+           pos.setBinlogFile(FileUtil.getCurentBinlogFile());
+           pos.setOffset(FileUtil.getOffset());
+           binlog.setPostion(pos);
            binlog.setDbName(data.getDbName());
            binlog.setColumnCount(data.getColumnCount());
            binlog.setPrimaryKey(data.getPrimaryKey().toString());

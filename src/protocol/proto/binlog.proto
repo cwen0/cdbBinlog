@@ -12,7 +12,7 @@ enum BinlogType {
 }
 
 message Binlog {
-    optional string postion    =1;
+    optional Pos postion    =1;
     optional string dbName    = 2;
     optional BinlogType type  = 3;
     optional int32 columnCount    = 4 [default = 0];
@@ -26,4 +26,9 @@ message Row {
     optional string column_type     = 2;
     optional string column_value    = 3;
     optional string sql   = 4;
+}
+
+message Pos {
+    optional string binlogFile   = 1;
+    optional uint64 offset  = 2;
 }

@@ -1,6 +1,5 @@
 package util;
 
-import binlog.FieldData;
 import config.Config;
 import protocol.BinlogProto.Binlog;
 
@@ -13,7 +12,7 @@ import java.io.FileOutputStream;
 public class FileUtil {
     public static final String binglogFilePre = "binlog-";
     public static String curentBinlogFile;
-    public static String postion = curentBinlogFile+"-0";
+    public static long Offset = 0;
 
     static {
        initCurrentBinlogFile();
@@ -35,11 +34,15 @@ public class FileUtil {
                     file.createNewFile();
                 }
                 curentBinlogFile = newFileName;
-                FileOutputStream output = new FileOutputStream(file);
+                FileOutputStream output = new FileOutputStream(file, true);
                 try {
-                    binlog.build().writeTo(output);
+                    int binlogLen = binlog.build().toByteArray().length;
+                    byte[] data = new byte[8 + binlogLen];
+                    System.arraycopy(ByteUtil.intToBytes(binlogLen), 0, data, 0, 4);
+                    System.arraycopy(binlog.build().toByteArray(), 0, data, 4, binlogLen);
+                    output.write(data);
                 } finally {
-                    postion = curentBinlogFile+file.length();
+                    Offset = file.length()+1;
                     output.close();
                 }
             }
@@ -48,8 +51,12 @@ public class FileUtil {
         }
     }
 
-    public static String getPostion() {
-        return postion;
+    public static long getOffset() {
+        return Offset;
+    }
+
+    public static String getCurentBinlogFile() {
+        return curentBinlogFile;
     }
 
     private static void initCurrentBinlogFile() {
