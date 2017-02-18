@@ -37,12 +37,12 @@ public class FileUtil {
                 FileOutputStream output = new FileOutputStream(file, true);
                 try {
                     int binlogLen = binlog.build().toByteArray().length;
-                    byte[] data = new byte[8 + binlogLen];
+                    byte[] data = new byte[4 + binlogLen];
                     System.arraycopy(ByteUtil.intToBytes(binlogLen), 0, data, 0, 4);
                     System.arraycopy(binlog.build().toByteArray(), 0, data, 4, binlogLen);
                     output.write(data);
                 } finally {
-                    pos = file.length()+1;
+                    pos = file.length();
                     output.close();
                 }
             }
