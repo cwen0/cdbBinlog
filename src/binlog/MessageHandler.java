@@ -71,6 +71,7 @@ public class MessageHandler {
            pos.setPos(FileUtil.getPos());
            binlog.setPostion(pos);
            binlog.setDbName(data.getDbName());
+           binlog.setTableName(data.getTableName());
            binlog.setColumnCount(data.getColumnCount());
            binlog.setPrimaryKey(data.getPrimaryKey().toString());
            binlog.setPrimaryValue(data.getPrimaryValue().toString());
