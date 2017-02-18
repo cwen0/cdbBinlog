@@ -30,41 +30,32 @@ public class MessageHandler {
            switch (data.getType()){
                case INSERT:
                    binlog.setType(BinlogType.INSERT);
-                   for(int i = 0; i < data.getColumnCount();i++) {
-                        Row.Builder row = Row.newBuilder();
-                        row.setColumnName(data.getColumns().get(i));
-                        row.setColumnValue(data.getValues().get(i));
-                        binlog.setRows(i, row);
-                   }
                    break;
                case UPDATE:
                    binlog.setType(BinlogType.UPDATE);
-                   for(int i = 0; i < data.getColumnCount();i++) {
-                       Row.Builder row = Row.newBuilder();
-                       row.setColumnName(data.getColumns().get(i));
-                       row.setColumnValue(data.getValues().get(i));
-                       binlog.setRows(i, row);
-                   }
                    break;
                case DELETE:
                    binlog.setType(BinlogType.DELETE);
-                   for(int i = 0; i < data.getColumnCount();i++) {
-                       Row.Builder row = Row.newBuilder();
-                       row.setColumnName(data.getColumns().get(i));
-                       row.setColumnValue(data.getValues().get(i));
-                       binlog.setRows(i, row);
-                   }
                    break;
                case DDL:
                    binlog.setType(BinlogType.DDL);
-                   for(int i = 0; i < data.getColumnCount();i++) {
-                       Row.Builder row = Row.newBuilder();
-                       row.setColumnValue(data.getValues().get(i));
-                       binlog.setRows(i, row);
-                   }
                    break;
                default:
                    break;
+           }
+           for(int i = 0; i < data.getColumnCount();i++) {
+               Row.Builder row = Row.newBuilder();
+               row.setColumnName(data.getColumns().get(i));
+               row.setColumnValue(data.getValues().get(i));
+               row.setSql(data.getValues().get(i));
+               binlog.setRows(i, row);
+           }
+
+           for(int i = 0; i < data.getPrimaryKey().size(); i++) {
+               Row.Builder row = Row.newBuilder();
+               row.setColumnName(data.getPrimaryKey().get(i));
+               row.setColumnValue(data.getPrimaryValue().get(i));
+               binlog.setPrimaryKey(row);
            }
            Pos.Builder pos = Pos.newBuilder();
            pos.setBinlogFile(FileUtil.getCurentBinlogFile());
@@ -73,8 +64,6 @@ public class MessageHandler {
            binlog.setDbName(data.getDbName());
            binlog.setTableName(data.getTableName());
            binlog.setColumnCount(data.getColumnCount());
-           binlog.setPrimaryKey(data.getPrimaryKey().toString());
-           binlog.setPrimaryValue(data.getPrimaryValue().toString());
            FileUtil.writeToFile(binlog);
 
        } catch (Exception e) {

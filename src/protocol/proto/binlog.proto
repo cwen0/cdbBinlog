@@ -17,9 +17,8 @@ message Binlog {
     optional string tableName   =3;
     optional BinlogType type  = 4;
     optional int32 columnCount    = 5 [default = 0];
-    optional string primaryKey    = 6;
-    optional string primaryValue  = 7;
-    repeated Row rows     = 8;
+    optional Row primaryKey    = 6;
+    repeated Row rows    = 7;
 }
 
 message Row {

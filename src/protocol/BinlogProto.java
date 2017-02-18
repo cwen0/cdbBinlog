@@ -186,53 +186,38 @@ public final class BinlogProto {
     int getColumnCount();
 
     /**
-     * <code>optional string primaryKey = 6;</code>
+     * <code>optional .protocol.Row primaryKey = 6;</code>
      */
     boolean hasPrimaryKey();
     /**
-     * <code>optional string primaryKey = 6;</code>
+     * <code>optional .protocol.Row primaryKey = 6;</code>
      */
-    java.lang.String getPrimaryKey();
+    protocol.BinlogProto.Row getPrimaryKey();
     /**
-     * <code>optional string primaryKey = 6;</code>
+     * <code>optional .protocol.Row primaryKey = 6;</code>
      */
-    com.google.protobuf.ByteString
-        getPrimaryKeyBytes();
+    protocol.BinlogProto.RowOrBuilder getPrimaryKeyOrBuilder();
 
     /**
-     * <code>optional string primaryValue = 7;</code>
-     */
-    boolean hasPrimaryValue();
-    /**
-     * <code>optional string primaryValue = 7;</code>
-     */
-    java.lang.String getPrimaryValue();
-    /**
-     * <code>optional string primaryValue = 7;</code>
-     */
-    com.google.protobuf.ByteString
-        getPrimaryValueBytes();
-
-    /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     java.util.List<protocol.BinlogProto.Row> 
         getRowsList();
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     protocol.BinlogProto.Row getRows(int index);
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     int getRowsCount();
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     java.util.List<? extends protocol.BinlogProto.RowOrBuilder> 
         getRowsOrBuilderList();
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     protocol.BinlogProto.RowOrBuilder getRowsOrBuilder(
         int index);
@@ -253,8 +238,6 @@ public final class BinlogProto {
       tableName_ = "";
       type_ = 0;
       columnCount_ = 0;
-      primaryKey_ = "";
-      primaryValue_ = "";
       rows_ = java.util.Collections.emptyList();
     }
 
@@ -328,21 +311,22 @@ public final class BinlogProto {
               break;
             }
             case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+              protocol.BinlogProto.Row.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = primaryKey_.toBuilder();
+              }
+              primaryKey_ = input.readMessage(protocol.BinlogProto.Row.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(primaryKey_);
+                primaryKey_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000020;
-              primaryKey_ = bs;
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
-              primaryValue_ = bs;
-              break;
-            }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 rows_ = new java.util.ArrayList<protocol.BinlogProto.Row>();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000040;
               }
               rows_.add(
                   input.readMessage(protocol.BinlogProto.Row.PARSER, extensionRegistry));
@@ -356,7 +340,7 @@ public final class BinlogProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           rows_ = java.util.Collections.unmodifiableList(rows_);
         }
         this.unknownFields = unknownFields.build();
@@ -513,118 +497,55 @@ public final class BinlogProto {
     }
 
     public static final int PRIMARYKEY_FIELD_NUMBER = 6;
-    private volatile java.lang.Object primaryKey_;
+    private protocol.BinlogProto.Row primaryKey_;
     /**
-     * <code>optional string primaryKey = 6;</code>
+     * <code>optional .protocol.Row primaryKey = 6;</code>
      */
     public boolean hasPrimaryKey() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional string primaryKey = 6;</code>
+     * <code>optional .protocol.Row primaryKey = 6;</code>
      */
-    public java.lang.String getPrimaryKey() {
-      java.lang.Object ref = primaryKey_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          primaryKey_ = s;
-        }
-        return s;
-      }
+    public protocol.BinlogProto.Row getPrimaryKey() {
+      return primaryKey_ == null ? protocol.BinlogProto.Row.getDefaultInstance() : primaryKey_;
     }
     /**
-     * <code>optional string primaryKey = 6;</code>
+     * <code>optional .protocol.Row primaryKey = 6;</code>
      */
-    public com.google.protobuf.ByteString
-        getPrimaryKeyBytes() {
-      java.lang.Object ref = primaryKey_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        primaryKey_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public protocol.BinlogProto.RowOrBuilder getPrimaryKeyOrBuilder() {
+      return primaryKey_ == null ? protocol.BinlogProto.Row.getDefaultInstance() : primaryKey_;
     }
 
-    public static final int PRIMARYVALUE_FIELD_NUMBER = 7;
-    private volatile java.lang.Object primaryValue_;
-    /**
-     * <code>optional string primaryValue = 7;</code>
-     */
-    public boolean hasPrimaryValue() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string primaryValue = 7;</code>
-     */
-    public java.lang.String getPrimaryValue() {
-      java.lang.Object ref = primaryValue_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          primaryValue_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string primaryValue = 7;</code>
-     */
-    public com.google.protobuf.ByteString
-        getPrimaryValueBytes() {
-      java.lang.Object ref = primaryValue_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        primaryValue_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int ROWS_FIELD_NUMBER = 8;
+    public static final int ROWS_FIELD_NUMBER = 7;
     private java.util.List<protocol.BinlogProto.Row> rows_;
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     public java.util.List<protocol.BinlogProto.Row> getRowsList() {
       return rows_;
     }
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     public java.util.List<? extends protocol.BinlogProto.RowOrBuilder> 
         getRowsOrBuilderList() {
       return rows_;
     }
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     public int getRowsCount() {
       return rows_.size();
     }
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     public protocol.BinlogProto.Row getRows(int index) {
       return rows_.get(index);
     }
     /**
-     * <code>repeated .protocol.Row rows = 8;</code>
+     * <code>repeated .protocol.Row rows = 7;</code>
      */
     public protocol.BinlogProto.RowOrBuilder getRowsOrBuilder(
         int index) {
@@ -659,13 +580,10 @@ public final class BinlogProto {
         output.writeInt32(5, columnCount_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, primaryKey_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, primaryValue_);
+        output.writeMessage(6, getPrimaryKey());
       }
       for (int i = 0; i < rows_.size(); i++) {
-        output.writeMessage(8, rows_.get(i));
+        output.writeMessage(7, rows_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -694,14 +612,12 @@ public final class BinlogProto {
           .computeInt32Size(5, columnCount_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, primaryKey_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, primaryValue_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getPrimaryKey());
       }
       for (int i = 0; i < rows_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, rows_.get(i));
+          .computeMessageSize(7, rows_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -749,11 +665,6 @@ public final class BinlogProto {
         result = result && getPrimaryKey()
             .equals(other.getPrimaryKey());
       }
-      result = result && (hasPrimaryValue() == other.hasPrimaryValue());
-      if (hasPrimaryValue()) {
-        result = result && getPrimaryValue()
-            .equals(other.getPrimaryValue());
-      }
       result = result && getRowsList()
           .equals(other.getRowsList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -790,10 +701,6 @@ public final class BinlogProto {
       if (hasPrimaryKey()) {
         hash = (37 * hash) + PRIMARYKEY_FIELD_NUMBER;
         hash = (53 * hash) + getPrimaryKey().hashCode();
-      }
-      if (hasPrimaryValue()) {
-        hash = (37 * hash) + PRIMARYVALUE_FIELD_NUMBER;
-        hash = (53 * hash) + getPrimaryValue().hashCode();
       }
       if (getRowsCount() > 0) {
         hash = (37 * hash) + ROWS_FIELD_NUMBER;
@@ -914,6 +821,7 @@ public final class BinlogProto {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getPostionFieldBuilder();
+          getPrimaryKeyFieldBuilder();
           getRowsFieldBuilder();
         }
       }
@@ -933,13 +841,15 @@ public final class BinlogProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         columnCount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        primaryKey_ = "";
+        if (primaryKeyBuilder_ == null) {
+          primaryKey_ = null;
+        } else {
+          primaryKeyBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000020);
-        primaryValue_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
         if (rowsBuilder_ == null) {
           rows_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           rowsBuilder_.clear();
         }
@@ -994,15 +904,15 @@ public final class BinlogProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.primaryKey_ = primaryKey_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
+        if (primaryKeyBuilder_ == null) {
+          result.primaryKey_ = primaryKey_;
+        } else {
+          result.primaryKey_ = primaryKeyBuilder_.build();
         }
-        result.primaryValue_ = primaryValue_;
         if (rowsBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             rows_ = java.util.Collections.unmodifiableList(rows_);
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.rows_ = rows_;
         } else {
@@ -1070,20 +980,13 @@ public final class BinlogProto {
           setColumnCount(other.getColumnCount());
         }
         if (other.hasPrimaryKey()) {
-          bitField0_ |= 0x00000020;
-          primaryKey_ = other.primaryKey_;
-          onChanged();
-        }
-        if (other.hasPrimaryValue()) {
-          bitField0_ |= 0x00000040;
-          primaryValue_ = other.primaryValue_;
-          onChanged();
+          mergePrimaryKey(other.getPrimaryKey());
         }
         if (rowsBuilder_ == null) {
           if (!other.rows_.isEmpty()) {
             if (rows_.isEmpty()) {
               rows_ = other.rows_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureRowsIsMutable();
               rows_.addAll(other.rows_);
@@ -1096,7 +999,7 @@ public final class BinlogProto {
               rowsBuilder_.dispose();
               rowsBuilder_ = null;
               rows_ = other.rows_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000040);
               rowsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getRowsFieldBuilder() : null;
@@ -1471,164 +1374,130 @@ public final class BinlogProto {
         return this;
       }
 
-      private java.lang.Object primaryKey_ = "";
+      private protocol.BinlogProto.Row primaryKey_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.BinlogProto.Row, protocol.BinlogProto.Row.Builder, protocol.BinlogProto.RowOrBuilder> primaryKeyBuilder_;
       /**
-       * <code>optional string primaryKey = 6;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
       public boolean hasPrimaryKey() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional string primaryKey = 6;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
-      public java.lang.String getPrimaryKey() {
-        java.lang.Object ref = primaryKey_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            primaryKey_ = s;
+      public protocol.BinlogProto.Row getPrimaryKey() {
+        if (primaryKeyBuilder_ == null) {
+          return primaryKey_ == null ? protocol.BinlogProto.Row.getDefaultInstance() : primaryKey_;
+        } else {
+          return primaryKeyBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .protocol.Row primaryKey = 6;</code>
+       */
+      public Builder setPrimaryKey(protocol.BinlogProto.Row value) {
+        if (primaryKeyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-          return s;
+          primaryKey_ = value;
+          onChanged();
         } else {
-          return (java.lang.String) ref;
+          primaryKeyBuilder_.setMessage(value);
         }
+        bitField0_ |= 0x00000020;
+        return this;
       }
       /**
-       * <code>optional string primaryKey = 6;</code>
-       */
-      public com.google.protobuf.ByteString
-          getPrimaryKeyBytes() {
-        java.lang.Object ref = primaryKey_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          primaryKey_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string primaryKey = 6;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
       public Builder setPrimaryKey(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        primaryKey_ = value;
-        onChanged();
+          protocol.BinlogProto.Row.Builder builderForValue) {
+        if (primaryKeyBuilder_ == null) {
+          primaryKey_ = builderForValue.build();
+          onChanged();
+        } else {
+          primaryKeyBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional string primaryKey = 6;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
+       */
+      public Builder mergePrimaryKey(protocol.BinlogProto.Row value) {
+        if (primaryKeyBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              primaryKey_ != null &&
+              primaryKey_ != protocol.BinlogProto.Row.getDefaultInstance()) {
+            primaryKey_ =
+              protocol.BinlogProto.Row.newBuilder(primaryKey_).mergeFrom(value).buildPartial();
+          } else {
+            primaryKey_ = value;
+          }
+          onChanged();
+        } else {
+          primaryKeyBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
       public Builder clearPrimaryKey() {
+        if (primaryKeyBuilder_ == null) {
+          primaryKey_ = null;
+          onChanged();
+        } else {
+          primaryKeyBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000020);
-        primaryKey_ = getDefaultInstance().getPrimaryKey();
-        onChanged();
         return this;
       }
       /**
-       * <code>optional string primaryKey = 6;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
-      public Builder setPrimaryKeyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
-        primaryKey_ = value;
+      public protocol.BinlogProto.Row.Builder getPrimaryKeyBuilder() {
+        bitField0_ |= 0x00000020;
         onChanged();
-        return this;
-      }
-
-      private java.lang.Object primaryValue_ = "";
-      /**
-       * <code>optional string primaryValue = 7;</code>
-       */
-      public boolean hasPrimaryValue() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return getPrimaryKeyFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional string primaryValue = 7;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
-      public java.lang.String getPrimaryValue() {
-        java.lang.Object ref = primaryValue_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            primaryValue_ = s;
-          }
-          return s;
+      public protocol.BinlogProto.RowOrBuilder getPrimaryKeyOrBuilder() {
+        if (primaryKeyBuilder_ != null) {
+          return primaryKeyBuilder_.getMessageOrBuilder();
         } else {
-          return (java.lang.String) ref;
+          return primaryKey_ == null ?
+              protocol.BinlogProto.Row.getDefaultInstance() : primaryKey_;
         }
       }
       /**
-       * <code>optional string primaryValue = 7;</code>
+       * <code>optional .protocol.Row primaryKey = 6;</code>
        */
-      public com.google.protobuf.ByteString
-          getPrimaryValueBytes() {
-        java.lang.Object ref = primaryValue_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          primaryValue_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protocol.BinlogProto.Row, protocol.BinlogProto.Row.Builder, protocol.BinlogProto.RowOrBuilder> 
+          getPrimaryKeyFieldBuilder() {
+        if (primaryKeyBuilder_ == null) {
+          primaryKeyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protocol.BinlogProto.Row, protocol.BinlogProto.Row.Builder, protocol.BinlogProto.RowOrBuilder>(
+                  getPrimaryKey(),
+                  getParentForChildren(),
+                  isClean());
+          primaryKey_ = null;
         }
-      }
-      /**
-       * <code>optional string primaryValue = 7;</code>
-       */
-      public Builder setPrimaryValue(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        primaryValue_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string primaryValue = 7;</code>
-       */
-      public Builder clearPrimaryValue() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        primaryValue_ = getDefaultInstance().getPrimaryValue();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string primaryValue = 7;</code>
-       */
-      public Builder setPrimaryValueBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        primaryValue_ = value;
-        onChanged();
-        return this;
+        return primaryKeyBuilder_;
       }
 
       private java.util.List<protocol.BinlogProto.Row> rows_ =
         java.util.Collections.emptyList();
       private void ensureRowsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           rows_ = new java.util.ArrayList<protocol.BinlogProto.Row>(rows_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -1636,7 +1505,7 @@ public final class BinlogProto {
           protocol.BinlogProto.Row, protocol.BinlogProto.Row.Builder, protocol.BinlogProto.RowOrBuilder> rowsBuilder_;
 
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public java.util.List<protocol.BinlogProto.Row> getRowsList() {
         if (rowsBuilder_ == null) {
@@ -1646,7 +1515,7 @@ public final class BinlogProto {
         }
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public int getRowsCount() {
         if (rowsBuilder_ == null) {
@@ -1656,7 +1525,7 @@ public final class BinlogProto {
         }
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public protocol.BinlogProto.Row getRows(int index) {
         if (rowsBuilder_ == null) {
@@ -1666,7 +1535,7 @@ public final class BinlogProto {
         }
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder setRows(
           int index, protocol.BinlogProto.Row value) {
@@ -1683,7 +1552,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder setRows(
           int index, protocol.BinlogProto.Row.Builder builderForValue) {
@@ -1697,7 +1566,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder addRows(protocol.BinlogProto.Row value) {
         if (rowsBuilder_ == null) {
@@ -1713,7 +1582,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder addRows(
           int index, protocol.BinlogProto.Row value) {
@@ -1730,7 +1599,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder addRows(
           protocol.BinlogProto.Row.Builder builderForValue) {
@@ -1744,7 +1613,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder addRows(
           int index, protocol.BinlogProto.Row.Builder builderForValue) {
@@ -1758,7 +1627,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder addAllRows(
           java.lang.Iterable<? extends protocol.BinlogProto.Row> values) {
@@ -1773,12 +1642,12 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder clearRows() {
         if (rowsBuilder_ == null) {
           rows_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           rowsBuilder_.clear();
@@ -1786,7 +1655,7 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public Builder removeRows(int index) {
         if (rowsBuilder_ == null) {
@@ -1799,14 +1668,14 @@ public final class BinlogProto {
         return this;
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public protocol.BinlogProto.Row.Builder getRowsBuilder(
           int index) {
         return getRowsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public protocol.BinlogProto.RowOrBuilder getRowsOrBuilder(
           int index) {
@@ -1816,7 +1685,7 @@ public final class BinlogProto {
         }
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public java.util.List<? extends protocol.BinlogProto.RowOrBuilder> 
            getRowsOrBuilderList() {
@@ -1827,14 +1696,14 @@ public final class BinlogProto {
         }
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public protocol.BinlogProto.Row.Builder addRowsBuilder() {
         return getRowsFieldBuilder().addBuilder(
             protocol.BinlogProto.Row.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public protocol.BinlogProto.Row.Builder addRowsBuilder(
           int index) {
@@ -1842,7 +1711,7 @@ public final class BinlogProto {
             index, protocol.BinlogProto.Row.getDefaultInstance());
       }
       /**
-       * <code>repeated .protocol.Row rows = 8;</code>
+       * <code>repeated .protocol.Row rows = 7;</code>
        */
       public java.util.List<protocol.BinlogProto.Row.Builder> 
            getRowsBuilderList() {
@@ -1855,7 +1724,7 @@ public final class BinlogProto {
           rowsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               protocol.BinlogProto.Row, protocol.BinlogProto.Row.Builder, protocol.BinlogProto.RowOrBuilder>(
                   rows_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           rows_ = null;
@@ -3606,18 +3475,17 @@ public final class BinlogProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014binlog.proto\022\010protocol\"\316\001\n\006Binlog\022\036\n\007p" +
+      "\n\014binlog.proto\022\010protocol\"\307\001\n\006Binlog\022\036\n\007p" +
       "ostion\030\001 \001(\0132\r.protocol.Pos\022\016\n\006dbName\030\002 " +
       "\001(\t\022\021\n\ttableName\030\003 \001(\t\022\"\n\004type\030\004 \001(\0162\024.p" +
       "rotocol.BinlogType\022\026\n\013columnCount\030\005 \001(\005:" +
-      "\0010\022\022\n\nprimaryKey\030\006 \001(\t\022\024\n\014primaryValue\030\007" +
-      " \001(\t\022\033\n\004rows\030\010 \003(\0132\r.protocol.Row\"R\n\003Row" +
-      "\022\023\n\013column_name\030\001 \001(\t\022\023\n\013column_type\030\002 \001" +
-      "(\t\022\024\n\014column_value\030\003 \001(\t\022\013\n\003sql\030\004 \001(\t\"&\n" +
-      "\003Pos\022\022\n\nbinlogFile\030\001 \001(\t\022\013\n\003pos\030\002 \001(\004*9\n" +
-      "\nBinlogType\022\n\n\006INSERT\020\000\022\n\n\006UPDATE\020\001\022\n\n\006D",
-      "ELETE\020\002\022\007\n\003DDL\020\003B\027\n\010protocolB\013BinlogProt" +
-      "o"
+      "\0010\022!\n\nprimaryKey\030\006 \001(\0132\r.protocol.Row\022\033\n" +
+      "\004rows\030\007 \003(\0132\r.protocol.Row\"R\n\003Row\022\023\n\013col" +
+      "umn_name\030\001 \001(\t\022\023\n\013column_type\030\002 \001(\t\022\024\n\014c" +
+      "olumn_value\030\003 \001(\t\022\013\n\003sql\030\004 \001(\t\"&\n\003Pos\022\022\n" +
+      "\nbinlogFile\030\001 \001(\t\022\013\n\003pos\030\002 \001(\004*9\n\nBinlog" +
+      "Type\022\n\n\006INSERT\020\000\022\n\n\006UPDATE\020\001\022\n\n\006DELETE\020\002",
+      "\022\007\n\003DDL\020\003B\027\n\010protocolB\013BinlogProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3636,7 +3504,7 @@ public final class BinlogProto {
     internal_static_protocol_Binlog_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Binlog_descriptor,
-        new java.lang.String[] { "Postion", "DbName", "TableName", "Type", "ColumnCount", "PrimaryKey", "PrimaryValue", "Rows", });
+        new java.lang.String[] { "Postion", "DbName", "TableName", "Type", "ColumnCount", "PrimaryKey", "Rows", });
     internal_static_protocol_Row_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_protocol_Row_fieldAccessorTable = new
