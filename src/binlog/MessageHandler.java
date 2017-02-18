@@ -68,7 +68,7 @@ public class MessageHandler {
            }
            Pos.Builder pos = Pos.newBuilder();
            pos.setBinlogFile(FileUtil.getCurentBinlogFile());
-           pos.setOffset(FileUtil.getOffset());
+           pos.setPos(FileUtil.getPos());
            binlog.setPostion(pos);
            binlog.setDbName(data.getDbName());
            binlog.setColumnCount(data.getColumnCount());

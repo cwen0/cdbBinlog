@@ -16,6 +16,7 @@ public class Config {
     public static int cdbPort;
     public static String guid;
     public static String binlogPath;
+    public static String binlogFilePre;
     public static int maxSize;
 
     static {
@@ -35,6 +36,7 @@ public class Config {
             cdbPort = Integer.parseInt(cdbPortStr);
             guid = pro.getProperty("guid");
             binlogPath = pro.getProperty("binlogPath");
+            binlogFilePre = pro.getProperty("binlogFilePre");
             String maxSizeStr = pro.getProperty("maxSize");
             maxSize = Integer.parseInt(maxSizeStr);
         } catch (IOException e) {

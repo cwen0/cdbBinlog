@@ -2804,13 +2804,13 @@ public final class BinlogProto {
         getBinlogFileBytes();
 
     /**
-     * <code>optional uint64 offset = 2;</code>
+     * <code>optional uint64 pos = 2;</code>
      */
-    boolean hasOffset();
+    boolean hasPos();
     /**
-     * <code>optional uint64 offset = 2;</code>
+     * <code>optional uint64 pos = 2;</code>
      */
-    long getOffset();
+    long getPos();
   }
   /**
    * Protobuf type {@code protocol.Pos}
@@ -2825,7 +2825,7 @@ public final class BinlogProto {
     }
     private Pos() {
       binlogFile_ = "";
-      offset_ = 0L;
+      pos_ = 0L;
     }
 
     @java.lang.Override
@@ -2864,7 +2864,7 @@ public final class BinlogProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              offset_ = input.readUInt64();
+              pos_ = input.readUInt64();
               break;
             }
           }
@@ -2934,19 +2934,19 @@ public final class BinlogProto {
       }
     }
 
-    public static final int OFFSET_FIELD_NUMBER = 2;
-    private long offset_;
+    public static final int POS_FIELD_NUMBER = 2;
+    private long pos_;
     /**
-     * <code>optional uint64 offset = 2;</code>
+     * <code>optional uint64 pos = 2;</code>
      */
-    public boolean hasOffset() {
+    public boolean hasPos() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional uint64 offset = 2;</code>
+     * <code>optional uint64 pos = 2;</code>
      */
-    public long getOffset() {
-      return offset_;
+    public long getPos() {
+      return pos_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2965,7 +2965,7 @@ public final class BinlogProto {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, binlogFile_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt64(2, offset_);
+        output.writeUInt64(2, pos_);
       }
       unknownFields.writeTo(output);
     }
@@ -2980,7 +2980,7 @@ public final class BinlogProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, offset_);
+          .computeUInt64Size(2, pos_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3004,10 +3004,10 @@ public final class BinlogProto {
         result = result && getBinlogFile()
             .equals(other.getBinlogFile());
       }
-      result = result && (hasOffset() == other.hasOffset());
-      if (hasOffset()) {
-        result = result && (getOffset()
-            == other.getOffset());
+      result = result && (hasPos() == other.hasPos());
+      if (hasPos()) {
+        result = result && (getPos()
+            == other.getPos());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -3024,10 +3024,10 @@ public final class BinlogProto {
         hash = (37 * hash) + BINLOGFILE_FIELD_NUMBER;
         hash = (53 * hash) + getBinlogFile().hashCode();
       }
-      if (hasOffset()) {
-        hash = (37 * hash) + OFFSET_FIELD_NUMBER;
+      if (hasPos()) {
+        hash = (37 * hash) + POS_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getOffset());
+            getPos());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -3149,7 +3149,7 @@ public final class BinlogProto {
         super.clear();
         binlogFile_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        offset_ = 0L;
+        pos_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3182,7 +3182,7 @@ public final class BinlogProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.offset_ = offset_;
+        result.pos_ = pos_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3230,8 +3230,8 @@ public final class BinlogProto {
           binlogFile_ = other.binlogFile_;
           onChanged();
         }
-        if (other.hasOffset()) {
-          setOffset(other.getOffset());
+        if (other.hasPos()) {
+          setPos(other.getPos());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3337,34 +3337,34 @@ public final class BinlogProto {
         return this;
       }
 
-      private long offset_ ;
+      private long pos_ ;
       /**
-       * <code>optional uint64 offset = 2;</code>
+       * <code>optional uint64 pos = 2;</code>
        */
-      public boolean hasOffset() {
+      public boolean hasPos() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional uint64 offset = 2;</code>
+       * <code>optional uint64 pos = 2;</code>
        */
-      public long getOffset() {
-        return offset_;
+      public long getPos() {
+        return pos_;
       }
       /**
-       * <code>optional uint64 offset = 2;</code>
+       * <code>optional uint64 pos = 2;</code>
        */
-      public Builder setOffset(long value) {
+      public Builder setPos(long value) {
         bitField0_ |= 0x00000002;
-        offset_ = value;
+        pos_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional uint64 offset = 2;</code>
+       * <code>optional uint64 pos = 2;</code>
        */
-      public Builder clearOffset() {
+      public Builder clearPos() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        offset_ = 0L;
+        pos_ = 0L;
         onChanged();
         return this;
       }
@@ -3448,10 +3448,10 @@ public final class BinlogProto {
       "\001(\t\022\024\n\014primaryValue\030\006 \001(\t\022\033\n\004rows\030\007 \003(\0132" +
       "\r.protocol.Row\"R\n\003Row\022\023\n\013column_name\030\001 \001" +
       "(\t\022\023\n\013column_type\030\002 \001(\t\022\024\n\014column_value\030" +
-      "\003 \001(\t\022\013\n\003sql\030\004 \001(\t\")\n\003Pos\022\022\n\nbinlogFile\030" +
-      "\001 \001(\t\022\016\n\006offset\030\002 \001(\004*9\n\nBinlogType\022\n\n\006I" +
-      "NSERT\020\000\022\n\n\006UPDATE\020\001\022\n\n\006DELETE\020\002\022\007\n\003DDL\020\003",
-      "B\027\n\010protocolB\013BinlogProto"
+      "\003 \001(\t\022\013\n\003sql\030\004 \001(\t\"&\n\003Pos\022\022\n\nbinlogFile\030" +
+      "\001 \001(\t\022\013\n\003pos\030\002 \001(\004*9\n\nBinlogType\022\n\n\006INSE" +
+      "RT\020\000\022\n\n\006UPDATE\020\001\022\n\n\006DELETE\020\002\022\007\n\003DDL\020\003B\027\n",
+      "\010protocolB\013BinlogProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3482,7 +3482,7 @@ public final class BinlogProto {
     internal_static_protocol_Pos_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Pos_descriptor,
-        new java.lang.String[] { "BinlogFile", "Offset", });
+        new java.lang.String[] { "BinlogFile", "Pos", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

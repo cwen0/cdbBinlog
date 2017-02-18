@@ -10,9 +10,9 @@ import java.io.FileOutputStream;
  * Created by cwen on 17-2-15.
  */
 public class FileUtil {
-    public static final String binglogFilePre = "binlog-";
+    public static String binglogFilePre = "binlog-";
     public static String curentBinlogFile;
-    public static long Offset = 0;
+    public static long pos = 0;
 
     static {
        initCurrentBinlogFile();
@@ -42,7 +42,7 @@ public class FileUtil {
                     System.arraycopy(binlog.build().toByteArray(), 0, data, 4, binlogLen);
                     output.write(data);
                 } finally {
-                    Offset = file.length()+1;
+                    pos = file.length()+1;
                     output.close();
                 }
             }
@@ -51,8 +51,8 @@ public class FileUtil {
         }
     }
 
-    public static long getOffset() {
-        return Offset;
+    public static long getPos() {
+        return pos;
     }
 
     public static String getCurentBinlogFile() {
@@ -60,6 +60,9 @@ public class FileUtil {
     }
 
     private static void initCurrentBinlogFile() {
+        if(Config.binlogFilePre != "") {
+            binglogFilePre = Config.binlogFilePre;
+        }
         File file = new File(Config.binlogPath);
         File[] array = file.listFiles();
         int currentNum = 1;
