@@ -55,7 +55,7 @@ public class MessageHandler {
                Row.Builder row = Row.newBuilder();
                row.setColumnName(data.getPrimaryKey().get(i));
                row.setColumnValue(data.getPrimaryValue().get(i));
-               binlog.setPrimaryKey(row);
+               binlog.setPrimaryKey(i, row);
            }
            Pos.Builder pos = Pos.newBuilder();
            pos.setBinlogFile(FileUtil.getCurentBinlogFile());
