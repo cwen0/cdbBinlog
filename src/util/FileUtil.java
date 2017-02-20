@@ -19,6 +19,7 @@ public class FileUtil {
     }
 
     public static void writeToFile(Binlog.Builder binlog){
+    public static void writeToFile(Binlog.Builder binlog){
         try {
             File file = new File(Config.binlogPath + "/" + curentBinlogFile);
             if(!file.exists()) {

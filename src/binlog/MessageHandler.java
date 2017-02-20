@@ -64,6 +64,7 @@ public class MessageHandler {
            binlog.setDbName(data.getDbName());
            binlog.setTableName(data.getTableName());
            binlog.setColumnCount(data.getColumnCount());
+           binlog.setCheckPoint(data.getCheckPoint());
            FileUtil.writeToFile(binlog);
 
        } catch (Exception e) {
@@ -115,7 +116,7 @@ public class MessageHandler {
            }
        }
        FieldData data = new FieldData(dbName, tableName,record.getOpt(),columnCount,columns,values,
-               primaryKey,primaryValue);
+               primaryKey,primaryValue, record.getCheckpoint());
        return data;
     }
 }

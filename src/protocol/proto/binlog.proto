@@ -19,6 +19,7 @@ message Binlog {
     optional int32 columnCount    = 5 [default = 0];
     repeated Row primaryKey    = 6;
     repeated Row rows    = 7;
+    optional string checkPoint = 8;
 }
 
 message Row {

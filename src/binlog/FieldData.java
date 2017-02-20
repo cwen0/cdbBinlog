@@ -16,13 +16,14 @@ public class FieldData {
     private List<String> values;
     private List<String> primaryKey;
     private List<String> primaryValue;
+    private String checkPoint;
 
     public FieldData() {
         super();
     }
 
     public FieldData(String dbName, String tableName,Type type, int columnCount, List<String> columns,
-                     List<String> values, List<String> primaryKey, List<String> primaryValue) {
+                     List<String> values, List<String> primaryKey, List<String> primaryValue, String checkPoint) {
         super();
         this.dbName = dbName;
         this.tableName = tableName;
@@ -32,6 +33,7 @@ public class FieldData {
         this.values = values;
         this.primaryKey = primaryKey;
         this.primaryValue = primaryValue;
+        this.checkPoint = checkPoint;
     }
 
     public String getDbName() {
@@ -96,5 +98,13 @@ public class FieldData {
 
     public void setPrimaryValue(List<String> primaryValue) {
         this.primaryValue = primaryValue;
+    }
+
+    public String getCheckPoint() {
+        return checkPoint;
+    }
+
+    public void setCheckPoint(String checkPoint) {
+        this.checkPoint = checkPoint;
     }
 }

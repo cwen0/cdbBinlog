@@ -232,6 +232,20 @@ public final class BinlogProto {
      */
     protocol.BinlogProto.RowOrBuilder getRowsOrBuilder(
         int index);
+
+    /**
+     * <code>optional string checkPoint = 8;</code>
+     */
+    boolean hasCheckPoint();
+    /**
+     * <code>optional string checkPoint = 8;</code>
+     */
+    java.lang.String getCheckPoint();
+    /**
+     * <code>optional string checkPoint = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getCheckPointBytes();
   }
   /**
    * Protobuf type {@code protocol.Binlog}
@@ -251,6 +265,7 @@ public final class BinlogProto {
       columnCount_ = 0;
       primaryKey_ = java.util.Collections.emptyList();
       rows_ = java.util.Collections.emptyList();
+      checkPoint_ = "";
     }
 
     @java.lang.Override
@@ -338,6 +353,12 @@ public final class BinlogProto {
               }
               rows_.add(
                   input.readMessage(protocol.BinlogProto.Row.PARSER, extensionRegistry));
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              checkPoint_ = bs;
               break;
             }
           }
@@ -577,6 +598,48 @@ public final class BinlogProto {
       return rows_.get(index);
     }
 
+    public static final int CHECKPOINT_FIELD_NUMBER = 8;
+    private volatile java.lang.Object checkPoint_;
+    /**
+     * <code>optional string checkPoint = 8;</code>
+     */
+    public boolean hasCheckPoint() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string checkPoint = 8;</code>
+     */
+    public java.lang.String getCheckPoint() {
+      java.lang.Object ref = checkPoint_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          checkPoint_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string checkPoint = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCheckPointBytes() {
+      java.lang.Object ref = checkPoint_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        checkPoint_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -609,6 +672,9 @@ public final class BinlogProto {
       }
       for (int i = 0; i < rows_.size(); i++) {
         output.writeMessage(7, rows_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, checkPoint_);
       }
       unknownFields.writeTo(output);
     }
@@ -643,6 +709,9 @@ public final class BinlogProto {
       for (int i = 0; i < rows_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, rows_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, checkPoint_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -689,6 +758,11 @@ public final class BinlogProto {
           .equals(other.getPrimaryKeyList());
       result = result && getRowsList()
           .equals(other.getRowsList());
+      result = result && (hasCheckPoint() == other.hasCheckPoint());
+      if (hasCheckPoint()) {
+        result = result && getCheckPoint()
+            .equals(other.getCheckPoint());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -727,6 +801,10 @@ public final class BinlogProto {
       if (getRowsCount() > 0) {
         hash = (37 * hash) + ROWS_FIELD_NUMBER;
         hash = (53 * hash) + getRowsList().hashCode();
+      }
+      if (hasCheckPoint()) {
+        hash = (37 * hash) + CHECKPOINT_FIELD_NUMBER;
+        hash = (53 * hash) + getCheckPoint().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -875,6 +953,8 @@ public final class BinlogProto {
         } else {
           rowsBuilder_.clear();
         }
+        checkPoint_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -941,6 +1021,10 @@ public final class BinlogProto {
         } else {
           result.rows_ = rowsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.checkPoint_ = checkPoint_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1053,6 +1137,11 @@ public final class BinlogProto {
               rowsBuilder_.addAllMessages(other.rows_);
             }
           }
+        }
+        if (other.hasCheckPoint()) {
+          bitField0_ |= 0x00000080;
+          checkPoint_ = other.checkPoint_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1898,6 +1987,82 @@ public final class BinlogProto {
           rows_ = null;
         }
         return rowsBuilder_;
+      }
+
+      private java.lang.Object checkPoint_ = "";
+      /**
+       * <code>optional string checkPoint = 8;</code>
+       */
+      public boolean hasCheckPoint() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string checkPoint = 8;</code>
+       */
+      public java.lang.String getCheckPoint() {
+        java.lang.Object ref = checkPoint_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            checkPoint_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string checkPoint = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCheckPointBytes() {
+        java.lang.Object ref = checkPoint_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          checkPoint_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string checkPoint = 8;</code>
+       */
+      public Builder setCheckPoint(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        checkPoint_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string checkPoint = 8;</code>
+       */
+      public Builder clearCheckPoint() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        checkPoint_ = getDefaultInstance().getCheckPoint();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string checkPoint = 8;</code>
+       */
+      public Builder setCheckPointBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        checkPoint_ = value;
+        onChanged();
+        return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3643,17 +3808,18 @@ public final class BinlogProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014binlog.proto\022\010protocol\"\307\001\n\006Binlog\022\036\n\007p" +
+      "\n\014binlog.proto\022\010protocol\"\333\001\n\006Binlog\022\036\n\007p" +
       "ostion\030\001 \001(\0132\r.protocol.Pos\022\016\n\006dbName\030\002 " +
       "\001(\t\022\021\n\ttableName\030\003 \001(\t\022\"\n\004type\030\004 \001(\0162\024.p" +
       "rotocol.BinlogType\022\026\n\013columnCount\030\005 \001(\005:" +
       "\0010\022!\n\nprimaryKey\030\006 \003(\0132\r.protocol.Row\022\033\n" +
-      "\004rows\030\007 \003(\0132\r.protocol.Row\"R\n\003Row\022\023\n\013col" +
-      "umn_name\030\001 \001(\t\022\023\n\013column_type\030\002 \001(\t\022\024\n\014c" +
-      "olumn_value\030\003 \001(\t\022\013\n\003sql\030\004 \001(\t\"&\n\003Pos\022\022\n" +
-      "\nbinlogFile\030\001 \001(\t\022\013\n\003pos\030\002 \001(\004*9\n\nBinlog" +
-      "Type\022\n\n\006INSERT\020\000\022\n\n\006UPDATE\020\001\022\n\n\006DELETE\020\002",
-      "\022\007\n\003DDL\020\003B\027\n\010protocolB\013BinlogProto"
+      "\004rows\030\007 \003(\0132\r.protocol.Row\022\022\n\ncheckPoint" +
+      "\030\010 \001(\t\"R\n\003Row\022\023\n\013column_name\030\001 \001(\t\022\023\n\013co" +
+      "lumn_type\030\002 \001(\t\022\024\n\014column_value\030\003 \001(\t\022\013\n" +
+      "\003sql\030\004 \001(\t\"&\n\003Pos\022\022\n\nbinlogFile\030\001 \001(\t\022\013\n" +
+      "\003pos\030\002 \001(\004*9\n\nBinlogType\022\n\n\006INSERT\020\000\022\n\n\006",
+      "UPDATE\020\001\022\n\n\006DELETE\020\002\022\007\n\003DDL\020\003B\027\n\010protoco" +
+      "lB\013BinlogProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3672,7 +3838,7 @@ public final class BinlogProto {
     internal_static_protocol_Binlog_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Binlog_descriptor,
-        new java.lang.String[] { "Postion", "DbName", "TableName", "Type", "ColumnCount", "PrimaryKey", "Rows", });
+        new java.lang.String[] { "Postion", "DbName", "TableName", "Type", "ColumnCount", "PrimaryKey", "Rows", "CheckPoint", });
     internal_static_protocol_Row_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_protocol_Row_fieldAccessorTable = new
