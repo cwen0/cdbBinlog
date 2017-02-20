@@ -1,7 +1,7 @@
 syntax = "proto2";
 package protocol;
 
-option java_package = "protocol";
+option java_package = "com.pingcap.tools.cdb.binlog.common.store";
 option java_outer_classname = "BinlogProto";
 
 enum BinlogType {
